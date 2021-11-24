@@ -1,0 +1,23 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat');
+* {margin:0; padding:0; font-family:'Montserrat';}
+
+body {background:#535353;}
+
+.menu h1{text-align: center; color: #fff;}
+
+.informacion h1{text-align: center; color: #fff;}
+table{ background-color: black; opacity: 0.9;}
+tr{background-color: white; border-top: 10px; border-top-color: black; }
+td{border-left: 3px; border-left-color: black;}
+
+.usuarios h1{text-align: center; color: #fff;}
+
+.titulo{background-color: tomato; text-align: center; border:2px solid #fff;}
+
+a{color:#fff; text-align: right;}
+
+.usuarios{background-color: #a68562;border:2px solid #fff;}
+
+.menu{background-color: #a68562;border:2px solid #fff;}
+
+.informacion{background-color: #a68562;border:2px solid #fff;}

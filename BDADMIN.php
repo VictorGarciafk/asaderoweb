@@ -14,6 +14,8 @@ if ($conn->connect_error) {
 <head>
   <meta charset="utf-8">
   <title>BDD</title>
+  <link rel="stylesheet" type="text/css" href="css/diseñoBD.css" />
+  <link rel="stylesheet" type="text/css" href="css/style.css" />
   <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
 
   <script>
@@ -27,9 +29,16 @@ if ($conn->connect_error) {
 </head>
 
 <body>
-  <a href="logout.php">log out</a>
+
+<div class="titulo">
+<h1>ASADERO ALTAR</h1>
+<H2>Control de sistema</H2>
+</div>
+
+  <br>
 
   <div class="usuarios">
+    <h1>USUARIOS</h1>
     <?php
     // Create connection
     $sql = "SELECT id_usuario, nombre_usuario, pass FROM usuarios";
@@ -67,6 +76,7 @@ if ($conn->connect_error) {
   <br><br>
 
   <div class="menu">
+  <h1>PRODUCTO</h1>
     <?php
     $sql2 = "SELECT id_producto, nombre_producto, PRECIO_PRODUCTO FROM menu";
     $result2 = $conn->query($sql2);
@@ -83,7 +93,6 @@ if ($conn->connect_error) {
     } else {
       echo "0 results";
     }
-    $conn->close();
     ?>
 
 
@@ -102,9 +111,48 @@ if ($conn->connect_error) {
     </form>
   </div>
 
+  <br><br>
 
-  <input type="time" name="abrir">
 
+  <div class="informacion">
+  <h1>INFORMACION</h1>
+    <?php
+    $sql3 = "SELECT imagenPortada, logo, horaAbrir, horaCerrar, numerocelular, id_informacion FROM INFORMACION";
+    $result = $conn->query($sql3);
+    //print_r($result);
+    if ($result->num_rows > 0) {
+      echo "<table border='1'><tr><th>numerocelular</th><th>horaAbrir</th><th>horaCerrar</th><th>imagenPortada</th><th>logo</th>";
+      // output data of each row
+      $row = $result->fetch_assoc();
+        echo "\n<tr>\n\t<td>" . $row["numerocelular"] . "</td>\n\t<td>" . $row["horaAbrir"] . "</td>\n\t<td>" . $row["horaCerrar"] . "</td>\n\t<td>" . $row["imagenPortada"] . "</td>\n\t<td>" . $row["logo"] . "</td>";
+      
+      echo "</table>";
+    } else {
+      echo "0 results";
+    }
+
+    ?>
+
+
+    <br>
+    <form action="updateInformacion.php" method="POST" enctype="multipart/form-data" autocomplete="off">
+
+      <fieldset>
+        <legend>Inserte la informacion del nuevo registro</legend>
+        numeroCelular: <input type="number" name="celular" id="" value=<?= $row['numerocelular'] ?>><br>
+        horaAbierto: <input type="time" name="abrir" id="" value="<?= $row['horaAbrir'] ?>"><br>
+        horaCerrar: <input type="time" name="cerrar" id="" value="<?= $row['horaCerrar'] ?>"><br>
+        imagenPortada: <input type="file" class="custom-file-input" id="" name="portada"><br>
+        Logo: <input type="file" class="custom-file-input" id="" name="Logo"><br>
+        <br>
+        <input type="submit" name ="enviar" value="AceptarProducto"><br>
+      </fieldset>
+    </form>
+  </div>
+  <br>
+
+  <a href="logout.php">log out</a>
+  <br>
 </body>
 
 </html>

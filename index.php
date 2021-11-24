@@ -33,22 +33,29 @@ $conn = new mysqli($host, $username, $password, $dbname);
 
 <body>
 
-    <div id="banner">
-        <img src="Imagenes//Fondo de presentacion.jpg" alt="Imagen del evento" class="ImagenEvento">
-    </div>
+    <?php
+    $sql = "SELECT * FROM informacion";
+    $resultContacto = $conn->query($sql);
+    $row = $resultContacto->fetch_assoc();
+
+    echo "<div id='banner'>";
+    echo "<img src='Imagenes/portada/". $row['imagenPortada'] ."' alt='Imagen del evento' class='ImagenEvento'>";
+    echo"</div>"
+    ?>
+    
 
     <div id="horario" class="fecha">
-      <h1>Horario.</h1>
-      <?php
-      $sql = "SELECT * FROM informacion";
-      $resultHorario = $conn->query($sql);
-      $row = $resultHorario->fetch_assoc();
+        <h1>Horario.</h1>
+        <?php
+        $sql = "SELECT * FROM informacion";
+        $resultHorario = $conn->query($sql);
+        $row = $resultHorario->fetch_assoc();
 
-      echo "<p>abierto de:</p><br>";
-      echo "<p>".$row['horaAbrir']."</p><br>";
-      echo "<p>a</p><br>";
-      echo "<p>".$row['horaCerrar']."</p><br>";
-      ?>
+        echo "<p>abierto de:</p><br>";
+        echo "<p>" . $row['horaAbrir'] . "</p><br>";
+        echo "<p>a</p><br>";
+        echo "<p>" . $row['horaCerrar'] . "</p><br>";
+        ?>
 
     </div>
 
@@ -58,24 +65,23 @@ $conn = new mysqli($host, $username, $password, $dbname);
         <div class="caja2">
 
             <?php
-            
+
             if ($conn->connect_error) {
                 die("Connection failed: " . $conn->connect_error);
             }
 
-            $sql = "SELECT * FROM menu";
-            $result = $conn->query($sql);
+            $sql2 = "SELECT * FROM menu";
+            $result = $conn->query($sql2);
 
             if ($result->num_rows > 0) {
-                
+
                 while ($row = $result->fetch_assoc()) {
 
-          echo "<div class='a'>
-          <img src='Imagenes/".$row['id_producto']. "/" . $row['imagen_producto'] . "' width='250' title='" . $row['nombre_producto'] . "' alt='logotipo'> 
+                    echo "<div class='a'>
+          <img src='Imagenes/" . $row['id_producto'] . "/" . $row['imagen_producto'] . "' width='250' title='" . $row['nombre_producto'] . "' alt='logotipo'> 
           <p>" . $row['nombre_producto'] . "</p> 
           <p> precio: " . $row['PRECIO_PRODUCTO'] . "</p> 
           </div>";
-            
                 }
             } else {
                 echo "0 results";
@@ -86,29 +92,29 @@ $conn = new mysqli($host, $username, $password, $dbname);
     </div>
 
     <div class="Contacto" id="Contacto">
-      <h3>¡contáctanos!.</h3>
-      <br>
-      <?php
-      $sql = "SELECT * FROM informacion";
-      $resultContacto = $conn->query($sql);
-      $row = $resultContacto->fetch_assoc();
+        <h3>¡contáctanos!.</h3>
+        <br>
+        <?php
+        $sql3 = "SELECT * FROM informacion";
+        $resultContacto = $conn->query($sql3);
+        $row = $resultContacto->fetch_assoc();
 
-      echo "<img src='Imagenes/". $row['logo']."' alt='Contacto'>";
-      echo "<ul>";
-      echo "<li>Telefono: ". $row['numerocelular']. "";
-      echo "</ul>";
-      echo "</div>";
-    
-    ?>
+        echo "<img src='Imagenes/logo/" . $row['logo'] . "' alt='Contacto'>";
+        echo "<ul>";
+        echo "<li>Telefono: " . $row['numerocelular'] . "";
+        echo "</ul>";
+        echo "</div>";
 
-    <footer>
-        <div class="footer">
-            <p>Unison 2019</p>
-        </div>
-    </footer>
+        ?>
 
-    <script src="http://code.jquery.com/jquery-latest.js"></script>
-    <script src="barra de navegacion.js"></script>
+        <footer>
+            <div class="footer">
+                <p>Unison 2019</p>
+            </div>
+        </footer>
+
+        <script src="http://code.jquery.com/jquery-latest.js"></script>
+        <script src="barra de navegacion.js"></script>
 
 </body>
 
